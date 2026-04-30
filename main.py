@@ -49,7 +49,7 @@ FORMAT = pyaudio.paInt16
 SILENCE_THRESHOLD = None  # 起動時に自動キャリブレーション
 SILENCE_DURATION = 1.5
 MIN_SPEECH_DURATION = 0.5
-MAX_SPEECH_DURATION = 30  # 最大録音秒数 (安全弁)
+MAX_SPEECH_DURATION = 600  # 最大録音秒数 (10分)
 CONFIRMATION_THRESHOLD = 10.0  # この秒数を超えた発話はLLM補正後にユーザ承認を求める
 CALIBRATION_SECONDS = 2   # キャリブレーション時間
 THRESHOLD_MULTIPLIER = 1.5  # ノイズ × この倍率 = 閾値

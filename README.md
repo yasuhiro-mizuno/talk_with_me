@@ -99,7 +99,7 @@ venv\Scripts\python.exe main.py
 | 設定 | デフォルト | 説明 |
 |------|-----------|------|
 | `SILENCE_DURATION` | 1.5秒 | 発話終了と判定する無音時間 |
-| `MAX_SPEECH_DURATION` | 30秒 | 最大録音時間（安全弁） |
+| `MAX_SPEECH_DURATION` | 600秒(10分) | 最大録音時間（安全弁） |
 | `TTS_RATE` | 150 | 読み上げ速度 |
 | `MIC_TOGGLE_HOTKEY` | Ctrl+M | マイクON/OFF切り替えのホットキー |
 | `MIC_START_ENABLED` | True | 起動時のマイク状態（False=ミュート起動） |
@@ -132,6 +132,8 @@ talk_with_me/
 │   ├── test_llm.py        # LLM 接続テスト
 │   ├── test_chat.py       # LLM チャットテスト（対話式）
 │   ├── test_correction.py # LLM 補正テスト（対話式）
+│   ├── calibrate_focus.py # Cline チャット欄の自動キャリブレーション
+│   ├── test_sounds.py     # Windows サウンド試聴テスト
 │   ├── check_voices.py    # 利用可能な音声一覧表示
 │   └── download_model.py  # Whisper モデル事前ダウンロード
 ├── LOG/                   # 作業ログ
@@ -156,9 +158,19 @@ talk_with_me/
 - **マイク**: 必須
 - **インターネット**: Claude API 通信＋初回モデルダウンロードに必要
 
+### Cline チャット欄の自動キャリブレーション
+
+サイドバーの幅を変えたり、別のPCで使う場合は、チャット入力欄の座標を再検出できます：
+
+```
+venv\Scripts\python.exe tests\calibrate_focus.py
+```
+
+VS Code の左下エリアを自動走査し、Cline チャット入力欄の座標を検出して `main.py` を自動更新します。
+
 ## 既知の制約
 
-- Cline チャット欄へのフォーカスは座標クリック方式のため、サイドバー幅を変更した場合は `SIDEBAR_X_OFFSET` の調整が必要
+- Cline チャット欄へのフォーカスは座標クリック方式（自動キャリブレーションで検出可能）
 - faster-whisper `small` の日本語認識は完璧ではないため、LLM 補正で補っている
 - CPU 推論のため、長い発話は文字起こしに数秒かかる場合がある
 - pyttsx3 の音声は機械的（将来 Edge-TTS への差替を検討可能）
