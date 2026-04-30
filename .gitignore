@@ -1,0 +1,19 @@
+# 環境・機密
+.env
+venv/
+
+# ユーザ指示ファイル
+要望.md
+PLAN.md
+
+# ランタイムファイル
+voice/voice_input.md
+voice/voice_draft.md
+voice/voice_summary.md
+
+# 外部通信ログ
+logs/
+
+# Python
+__pycache__/
+*.pyc
